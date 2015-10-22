@@ -27,8 +27,6 @@ void setup () {
   treasure=loadImage("img/treasure.png");
   p=floor(random(0,600));
   q=floor(random(0,440));
-  
-  
 }
 
 void draw() {
@@ -66,10 +64,10 @@ void draw() {
   if(p+40>shipX&&q+40>shipY && p<shipX+40&&q<shipY+40){
    p=floor(random(660));
    q=floor(random(20,460));
-              w=w+20;
-            }else if(w>161){
-              w=160;
-            }
+      w=w+20;
+     }else if(w>160){
+        w=160;
+    }
      
   //Ship
   image(ship,shipX,shipY);
@@ -105,27 +103,24 @@ void draw() {
   enemyX%=640;
   enemyY=floor(random(440));}
   else if(enemyX+40>shipX&&enemyY+40>shipY && enemyX<shipX+40&&enemyY<shipY+40){
-                enemyX=0;
-                enemyY=floor(random(440));
-                w-=40;
-            }else if(w==0){
-              gameState=GAME_LOSE;
-            }
-        break;
- 
+     enemyX=0;
+ enemyY=floor(random(440));
+    w-=40;
+    }else if(w==0){
+    gameState=GAME_LOSE;
+   }
+   break;
        case GAME_LOSE:
            image(lose2,0,0);
  if(mouseY>300 && mouseY<350 && mouseX>210 && mouseX<440){
-               if(mousePressed){
-                 gameState = GAME_RUN;
-                 w=40;
-               }
-               else{
-                 
-                 image(lose1,0,0);
-               } 
-             }
-     break;
+     if(mousePressed){
+    gameState = GAME_RUN;
+        w=40;
+      }
+     else{
+  image(lose1,0,0);
+   } 
+  } break;
     }
   }
 
