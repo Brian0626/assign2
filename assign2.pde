@@ -1,12 +1,15 @@
+/* please implement your assign1 code in this file. */
 PImage enemy,hp,ship,treasure,background1,background2,start1,start2,lose1,lose2;
-int enemyX,enemyY,p,q,w,s1,s2;
+int enemyX,enemyY,p,q,w,s1,s2,gameState;
  float shipX,shipY,speed=5;
  boolean upPressed,downPressed,leftPressed,rightPressed = false; 
- int gameState;
+
  final int GAME_START=0; 
  final int GAME_RUN=1;
  final int GAME_LOSE=2;
+ 
 void setup () {
+ 
   gameState=GAME_START;
   size(640,480) ; 
   enemyX=0;
@@ -15,7 +18,7 @@ void setup () {
   s2=-640;
   shipX=600;
   shipY=200;
-  w=20;
+  w=40;
   
   start1=loadImage("img/start1.png");
   start2=loadImage("img/start2.png");
@@ -27,6 +30,8 @@ void setup () {
   treasure=loadImage("img/treasure.png");
   p=floor(random(0,600));
   q=floor(random(0,440));
+  
+  
 }
 
 void draw() {
@@ -57,17 +62,18 @@ void draw() {
   //Hp
   colorMode(RGB);
   fill(255,0,0);
-  rect(15,9,w+40,16);
+  rect(15,9,w,16);
   image(hp,5,5);
   //Treasure
   image(treasure,p,q);
   if(p+40>shipX&&q+40>shipY && p<shipX+40&&q<shipY+40){
-   p=floor(random(660));
-   q=floor(random(20,460));
-      w=w+20;
-     }else if(w>160){
-        w=160;
-    }
+   p=floor(random(600));
+   q=floor(random(20,440));
+              w=w+20;
+            }
+   if(w>=200){
+              w=200;
+            }
      
   //Ship
   image(ship,shipX,shipY);
@@ -83,15 +89,15 @@ void draw() {
    if (rightPressed) {
      shipX += speed;
  }  
-   if(shipX>590){
-   shipX=590;
+   if(shipX>600){
+   shipX=600;
  }
    if(shipX<0){
    shipX=0;
  }
  
-   if(shipY>430){
-     shipY=430;
+   if(shipY>440){
+     shipY=440;
  }
    if(shipY<0){
      shipY=0;
@@ -103,24 +109,27 @@ void draw() {
   enemyX%=640;
   enemyY=floor(random(440));}
   else if(enemyX+40>shipX&&enemyY+40>shipY && enemyX<shipX+40&&enemyY<shipY+40){
-     enemyX=0;
- enemyY=floor(random(440));
-    w-=40;
-    }else if(w==0){
-    gameState=GAME_LOSE;
-   }
-   break;
+                enemyX=0;
+                enemyY=floor(random(440));
+                w-=40;
+            }else if(w==0){
+              gameState=GAME_LOSE;
+            }
+        break;
+ 
        case GAME_LOSE:
            image(lose2,0,0);
  if(mouseY>300 && mouseY<350 && mouseX>210 && mouseX<440){
-     if(mousePressed){
-    gameState = GAME_RUN;
-        w=40;
-      }
-     else{
-  image(lose1,0,0);
-   } 
-  } break;
+               if(mousePressed){
+                 gameState = GAME_RUN;
+                 w=40;
+               }
+               else{
+                 
+                 image(lose1,0,0);
+               } 
+             }
+     break;
     }
   }
 
@@ -161,8 +170,3 @@ if (key == CODED) {
      } 
    } 
   }
-
-
-
-
-
